@@ -8,7 +8,15 @@ Template discover SSL-enabled ports on host and for each creates item with days 
 
 # Deploy
 ## Zabbix server host
-Place `ssl_ports_lld.py` and `ssl_expiration_check.py` in Zabbix's external scripts folder.
+* Install python3 and pip3 packages. For example (CentOS):
+```
+# yum install python34 python34-pip
+```
+* Install pyopenssl library:
+```
+pip3 install pyopenssl
+```
+* Place `ssl_ports_lld.py` and `ssl_expiration_check.py` in Zabbix's external scripts folder.
 To find the folder you can run
 ```
 # grep 'ExternalScripts=' /etc/zabbix/zabbix_server.conf
