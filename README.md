@@ -24,3 +24,6 @@ To find the folder you can run
 ## Zabbix web interface
 * Navigate to Configuration → Templates → Import and choose `Template SSL certs expiration check.xml` file in proper field. Next put `Import` button.
 * Navigate to Configuration → Hosts → you_host → Templates and link the template.
+
+# Settings
+Change ssl_ports list in `ssl_ports_lld.py` to reflect you services. By default script check 443, 587, 636, 993, 995 and 8888 ports.
