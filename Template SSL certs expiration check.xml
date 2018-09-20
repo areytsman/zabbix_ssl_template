@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zabbix_export>
+    <version>3.4</version>
+    <date>2018-09-20T09:58:19Z</date>
+    <groups>
+        <group>
+            <name>Templates</name>
+        </group>
+    </groups>
+    <templates>
+        <template>
+            <template>Template SSL certs expiration check</template>
+            <name>Template SSL certs expiration check</name>
+            <description>Discover SSL-enabled ports on server and creates items and triggers to check expiration date</description>
+            <groups>
+                <group>
+                    <name>Templates</name>
+                </group>
+            </groups>
+            <applications>
+                <application>
+                    <name>SSL certificate</name>
+                </application>
+            </applications>
+            <items/>
+            <discovery_rules>
+                <discovery_rule>
+                    <name>SLL Ports Discovery</name>
+                    <type>10</type>
+                    <snmp_community/>
+                    <snmp_oid/>
+                    <key>ssl_ports_lld.py[&quot;{HOST.CONN}&quot;]</key>
+                    <delay>1d</delay>
+                    <status>0</status>
+                    <allowed_hosts/>
+                    <snmpv3_contextname/>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                    <snmpv3_privpassphrase/>
+                    <params/>
+                    <ipmi_sensor/>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <filter>
+                        <evaltype>0</evaltype>
+                        <formula/>
+                        <conditions/>
+                    </filter>
+                    <lifetime>1w</lifetime>
+                    <description/>
+                    <item_prototypes>
+                        <item_prototype>
+                            <name>SSL certificate on port {#SSLPORT} days to expiration</name>
+                            <type>10</type>
+                            <snmp_community/>
+                            <snmp_oid/>
+                            <key>ssl_expiration_check.py[&quot;{HOST.CONN}&quot;, &quot;{#SSLPORT}&quot;]</key>
+                            <delay>1h</delay>
+                            <history>1w</history>
+                            <trends>365d</trends>
+                            <status>0</status>
+                            <value_type>3</value_type>
+                            <allowed_hosts/>
+                            <units/>
+                            <snmpv3_contextname/>
+                            <snmpv3_securityname/>
+                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                            <snmpv3_authpassphrase/>
+                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                            <snmpv3_privpassphrase/>
+                            <params/>
+                            <ipmi_sensor/>
+                            <authtype>0</authtype>
+                            <username/>
+                            <password/>
+                            <publickey/>
+                            <privatekey/>
+                            <port/>
+                            <description/>
+                            <inventory_link>0</inventory_link>
+                            <applications>
+                                <application>
+                                    <name>SSL certificate</name>
+                                </application>
+                            </applications>
+                            <valuemap/>
+                            <logtimefmt/>
+                            <preprocessing/>
+                            <jmx_endpoint/>
+                            <application_prototypes/>
+                            <master_item_prototype/>
+                        </item_prototype>
+                    </item_prototypes>
+                    <trigger_prototypes>
+                        <trigger_prototype>
+                            <expression>{Template SSL certs expiration check:ssl_expiration_check.py[&quot;{HOST.CONN}&quot;, &quot;{#SSLPORT}&quot;].last()}&lt;{$SSL_EXPIRY_AVG}</expression>
+                            <recovery_mode>0</recovery_mode>
+                            <recovery_expression/>
+                            <name>SSL-cert expiring in {ITEM.LASTVALUE} days on {HOST.DNS}:{#SSLPORT}</name>
+                            <correlation_mode>0</correlation_mode>
+                            <correlation_tag/>
+                            <url/>
+                            <status>0</status>
+                            <priority>3</priority>
+                            <description/>
+                            <type>0</type>
+                            <manual_close>0</manual_close>
+                            <dependencies>
+                                <dependency>
+                                    <name>SSL-cert totally expired ({ITEM.LASTVALUE} days left) on {HOST.DNS}:{#SSLPORT}</name>
+                                    <expression>{Template SSL certs expiration check:ssl_expiration_check.py[&quot;{HOST.CONN}&quot;, &quot;{#SSLPORT}&quot;].last()}&lt;{$SSL_EXPIRY_HIGH}</expression>
+                                    <recovery_expression/>
+                                </dependency>
+                            </dependencies>
+                            <tags/>
+                        </trigger_prototype>
+                        <trigger_prototype>
+                            <expression>{Template SSL certs expiration check:ssl_expiration_check.py[&quot;{HOST.CONN}&quot;, &quot;{#SSLPORT}&quot;].last()}&lt;{$SSL_EXPIRY_WARN}</expression>
+                            <recovery_mode>0</recovery_mode>
+                            <recovery_expression/>
+                            <name>SSL-cert expiring in {ITEM.LASTVALUE} days on {HOST.DNS}:{#SSLPORT}</name>
+                            <correlation_mode>0</correlation_mode>
+                            <correlation_tag/>
+                            <url/>
+                            <status>0</status>
+                            <priority>2</priority>
+                            <description/>
+                            <type>0</type>
+                            <manual_close>0</manual_close>
+                            <dependencies>
+                                <dependency>
+                                    <name>SSL-cert expiring in {ITEM.LASTVALUE} days on {HOST.DNS}:{#SSLPORT}</name>
+                                    <expression>{Template SSL certs expiration check:ssl_expiration_check.py[&quot;{HOST.CONN}&quot;, &quot;{#SSLPORT}&quot;].last()}&lt;{$SSL_EXPIRY_AVG}</expression>
+                                    <recovery_expression/>
+                                </dependency>
+                            </dependencies>
+                            <tags/>
+                        </trigger_prototype>
+                        <trigger_prototype>
+                            <expression>{Template SSL certs expiration check:ssl_expiration_check.py[&quot;{HOST.CONN}&quot;, &quot;{#SSLPORT}&quot;].last()}&lt;{$SSL_EXPIRY_HIGH}</expression>
+                            <recovery_mode>0</recovery_mode>
+                            <recovery_expression/>
+                            <name>SSL-cert totally expired ({ITEM.LASTVALUE} days left) on {HOST.DNS}:{#SSLPORT}</name>
+                            <correlation_mode>0</correlation_mode>
+                            <correlation_tag/>
+                            <url/>
+                            <status>0</status>
+                            <priority>4</priority>
+                            <description/>
+                            <type>0</type>
+                            <manual_close>0</manual_close>
+                            <dependencies/>
+                            <tags/>
+                        </trigger_prototype>
+                    </trigger_prototypes>
+                    <graph_prototypes/>
+                    <host_prototypes/>
+                    <jmx_endpoint/>
+                </discovery_rule>
+            </discovery_rules>
+            <httptests/>
+            <macros>
+                <macro>
+                    <macro>{$SSL_EXPIRY_AVG}</macro>
+                    <value>30</value>
+                </macro>
+                <macro>
+                    <macro>{$SSL_EXPIRY_HIGH}</macro>
+                    <value>5</value>
+                </macro>
+                <macro>
+                    <macro>{$SSL_EXPIRY_WARN}</macro>
+                    <value>60</value>
+                </macro>
+            </macros>
+            <templates/>
+            <screens/>
+        </template>
+    </templates>
+</zabbix_export>
