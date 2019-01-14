@@ -25,4 +25,7 @@ if __name__ == '__main__':
     expire = datetime.datetime(year, month, day)
     days_to_expire = expire - datetime.datetime.now()
 
-    print(days_to_expire.days)
+    if days_to_expire.days >= 0:
+        print(days_to_expire.days)
+    else:
+        print(0)
