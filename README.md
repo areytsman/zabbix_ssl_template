@@ -27,3 +27,7 @@ To find the folder you can run
 
 # Settings
 Change ssl_ports list in `ssl_ports_lld.py` to reflect you services. By default script check 443, 587, 636, 993, 995 and 8888 ports.
+
+## SNI support
+If you need a sni support (multiple hostnames for one IP) replace file ssl_expiration_check.py by ssl_expiration_check_sni.py
+NOTE! This change will break getting an untrusted certificates (self-signed, expired etc). 
