@@ -12,6 +12,7 @@ Template discover SSL-enabled ports on host and for each creates item with days 
 ```
 # yum install python34 python34-pip
 ```
+N.B. python versions >= 3.7 are not supported.
 * Install pyopenssl library:
 ```
 pip3 install pyopenssl
